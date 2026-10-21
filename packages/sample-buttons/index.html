@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sample Buttons</title>
+    </head>
+
+    <body class="bg-base-100 text-base-content min-h-screen p-6 font-sans md:p-12">
+        <main class="mx-auto flex max-w-4xl flex-col gap-12">
+            <h1 class="text-3xl font-bold tracking-tight">Buttons</h1>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">Colors</h2>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" class="btn">Default</button>
+                    <button type="button" class="btn btn-neutral">Neutral</button>
+                    <button type="button" class="btn btn-primary">Primary</button>
+                    <button type="button" class="btn btn-secondary">Secondary</button>
+                    <button type="button" class="btn btn-accent">Accent</button>
+                    <button type="button" class="btn btn-info">Info</button>
+                    <button type="button" class="btn btn-success">Success</button>
+                    <button type="button" class="btn btn-warning">Warning</button>
+                    <button type="button" class="btn btn-error">Error</button>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">Styles</h2>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" class="btn btn-outline">Outline</button>
+                    <button type="button" class="btn btn-outline btn-primary">Outline</button>
+                    <button type="button" class="btn btn-outline btn-error">Outline</button>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" class="btn btn-dash">Dash</button>
+                    <button type="button" class="btn btn-dash btn-primary">Dash</button>
+                    <button type="button" class="btn btn-dash btn-success">Dash</button>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" class="btn btn-soft">Soft</button>
+                    <button type="button" class="btn btn-soft btn-primary">Soft</button>
+                    <button type="button" class="btn btn-soft btn-warning">Soft</button>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" class="btn btn-ghost">Ghost</button>
+                    <button type="button" class="btn btn-ghost btn-primary">Ghost</button>
+                    <button type="button" class="btn btn-link">Link</button>
+                    <button type="button" class="btn btn-link btn-primary">Link</button>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">Sizes</h2>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" class="btn btn-primary btn-xs">Xsmall</button>
+                    <button type="button" class="btn btn-primary btn-sm">Small</button>
+                    <button type="button" class="btn btn-primary btn-md">Medium</button>
+                    <button type="button" class="btn btn-primary btn-lg">Large</button>
+                    <button type="button" class="btn btn-primary btn-xl">Xlarge</button>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">With icon</h2>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" class="btn btn-outline">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="m12 19-7-7 7-7" />
+                            <path d="M19 12H5" />
+                        </svg>
+                        Back
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        Next
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 12h14" />
+                            <path d="m12 5 7 7-7 7" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-soft btn-success btn-sm">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M12 15V3" />
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <path d="m7 10 5 5 5-5" />
+                        </svg>
+                        Download
+                    </button>
+                    <button type="button" class="btn btn-neutral btn-lg">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 12h14" />
+                            <path d="M12 5v14" />
+                        </svg>
+                        Add item
+                    </button>
+                    <button type="button" class="btn btn-square btn-ghost" aria-label="Previous">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-circle btn-primary" aria-label="Next">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">Shapes</h2>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" class="btn btn-wide btn-neutral">Wide</button>
+                    <button type="button" class="btn btn-square btn-primary" aria-label="Like">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                            />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-circle btn-outline btn-primary" aria-label="Like">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                            />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-circle btn-lg btn-secondary" aria-label="Like">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <button type="button" class="btn btn-block btn-primary">Block</button>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">States</h2>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" class="btn btn-primary btn-active">Active</button>
+                    <button type="button" class="btn btn-outline btn-primary" aria-pressed="true">Pressed</button>
+                    <button type="button" class="btn btn-primary" disabled>Disabled</button>
+                    <a href="#" class="btn btn-primary btn-disabled" aria-disabled="true" tabindex="-1"
+                        >Disabled link</a
+                    >
+                    <a href="#" class="btn btn-secondary">Link as button</a>
+                </div>
+            </section>
+
+            <section class="flex flex-col gap-4">
+                <h2 class="text-lg font-semibold">Token overrides</h2>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" class="btn btn-primary [--btn-radius:9999px]">Pill</button>
+                    <button type="button" class="btn btn-primary [--btn-height:3.5rem] [--btn-padding-x:2rem]">
+                        Tall
+                    </button>
+                    <button type="button" class="btn btn-outline btn-primary [--btn-border-width:2px]">
+                        2px border
+                    </button>
+                    <button type="button" class="btn btn-accent [--btn-radius:0]">Square corners</button>
+                    <button type="button" class="btn btn-sm btn-primary [--btn-radius:9999px]">Small pill</button>
+                </div>
+            </section>
+        </main>
+
+        <script type="module" src="./src/index.js"></script>
+    </body>
+</html>

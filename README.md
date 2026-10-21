@@ -14,8 +14,8 @@ windvault/
 ├── pnpm-workspace.yaml          # pnpm workspace configuration
 ├── node_modules/                # Centralized dependencies (Vite, Tailwind CSS v4)
 └── packages/
-    ├── sample-button/           # Demo component: Interactive Button
-    │   ├── package.json         # Component scripts & @components/sample-button scope
+    ├── sample-buttons/          # Demo component: Interactive Button
+    │   ├── package.json         # Component scripts & @components/sample-buttons scope
     │   ├── vite.config.js       # Vite + Tailwind v4 configuration
     │   ├── index.html           # Component HTML entry point
     │   └── src/
@@ -78,7 +78,7 @@ You can run commands either from the root directory targeting a specific workspa
 
 ```bash
 # Start the Vite dev server for a single component
-pnpm --filter @components/sample-button dev
+pnpm --filter @components/sample-buttons dev
 
 # Build a single component into its dist/ folder
 pnpm --filter @components/responsive-card build
@@ -90,7 +90,7 @@ pnpm build
 #### Option B: Run inside a component directory
 
 ```bash
-cd packages/sample-button
+cd packages/sample-buttons
 pnpm dev
 pnpm build
 ```

@@ -1,0 +1,13 @@
+{
+    "name": "@components/sample-buttons",
+    "version": "1.0.0",
+    "type": "module",
+    "exports": {
+        "./button.css": "./src/button.css",
+        "./theme.css": "./src/theme.css"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    }
+}

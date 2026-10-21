@@ -1,0 +1,209 @@
+/*
+ * Button utilities (DaisyUI-like): btn + color + style + size + shape.
+ *
+ *   <button class="btn btn-primary btn-outline btn-lg">…</button>
+ *
+ * Only `btn` sets real CSS properties. All modifiers set custom properties that `btn`
+ * reads, so modifiers never fight over the same property and their order is irrelevant.
+ *
+ * Public tokens (override on :root or per element, e.g. class="btn [--btn-height:3rem]"):
+ *   --btn-height, --btn-padding-x, --btn-radius, --btn-border-width, --btn-font-size,
+ *   --btn-gap, --btn-icon-size, --btn-shadow, --btn-color, --btn-content, --btn-tint, --btn-tint-content
+ *
+ * Internal (set by modifiers only):
+ *   --btn-scale, --btn-font-scale, --btn-px, --btn-bg, --btn-fg, --btn-border,
+ *   --btn-bg-hover, --btn-fg-hover, --btn-border-hover, --btn-border-style, --btn-elevation
+ */
+@layer base {
+    :where(:root) {
+        --btn-height: 2.5rem;
+        --btn-padding-x: 1rem;
+        --btn-radius: 0.5rem;
+        --btn-border-width: 1px;
+        --btn-font-size: 1rem;
+        --btn-gap: 0.5rem;
+        --btn-icon-size: 1.2em;
+        --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+        /* Fill color and its readable text color (solid style) */
+        --btn-color: var(--color-base-200);
+        --btn-content: var(--color-base-content);
+
+        /* Color used by outline, dash, soft, ghost and link styles */
+        --btn-tint: var(--color-base-content);
+        --btn-tint-content: var(--color-base-100);
+    }
+}
+
+@utility btn {
+    @apply inline-flex shrink-0 cursor-pointer touch-manipulation items-center justify-center gap-(--btn-gap) text-center align-middle leading-tight font-semibold whitespace-nowrap no-underline select-none;
+
+    /* Icons scale with the font size; :where() keeps specificity low so size-* on the svg still wins */
+    @apply [&>:where(svg)]:size-(--btn-icon-size) [&>:where(svg)]:shrink-0;
+
+    /* Size: tokens scaled by the size modifiers */
+    @apply h-[calc(var(--btn-height)*var(--btn-scale,1))] px-[calc(var(--btn-padding-x)*var(--btn-scale,1)*var(--btn-px,1))] text-[calc(var(--btn-font-size)*var(--btn-font-scale,1))];
+
+    /* Shape */
+    @apply rounded-(--btn-radius) border-(length:--btn-border-width) [border-style:var(--btn-border-style,solid)];
+
+    /* Colors (solid style as fallback) */
+    @apply border-(--btn-border,var(--btn-color)) bg-(--btn-bg,var(--btn-color)) text-(--btn-fg,var(--btn-content));
+    @apply shadow-(--btn-elevation,var(--btn-shadow));
+
+    @apply transition-[color,background-color,border-color,box-shadow,translate] duration-200 ease-out;
+
+    /* Hover, plus the same look for .btn-active and aria-pressed="true" */
+    @apply hover:border-(--btn-border-hover,var(--btn-bg-hover,color-mix(in_oklab,var(--btn-color)_88%,black))) hover:bg-(--btn-bg-hover,color-mix(in_oklab,var(--btn-color)_88%,black)) hover:text-(--btn-fg-hover,var(--btn-fg,var(--btn-content)));
+    @apply aria-pressed:border-(--btn-border-hover,var(--btn-bg-hover,color-mix(in_oklab,var(--btn-color)_88%,black))) aria-pressed:bg-(--btn-bg-hover,color-mix(in_oklab,var(--btn-color)_88%,black)) aria-pressed:text-(--btn-fg-hover,var(--btn-fg,var(--btn-content)));
+    @apply [&.btn-active]:border-(--btn-border-hover,var(--btn-bg-hover,color-mix(in_oklab,var(--btn-color)_88%,black))) [&.btn-active]:bg-(--btn-bg-hover,color-mix(in_oklab,var(--btn-color)_88%,black)) [&.btn-active]:text-(--btn-fg-hover,var(--btn-fg,var(--btn-content)));
+
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--btn-tint);
+    @apply active:translate-y-px;
+
+    /* Disabled: native attribute, aria-disabled (links) or .btn-disabled */
+    @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&.btn-disabled]:pointer-events-none [&.btn-disabled]:opacity-50;
+}
+
+/* Colors */
+@utility btn-neutral {
+    --btn-color: var(--color-neutral);
+    --btn-content: var(--color-neutral-content);
+    --btn-tint: var(--color-neutral);
+    --btn-tint-content: var(--color-neutral-content);
+}
+
+@utility btn-primary {
+    --btn-color: var(--color-primary);
+    --btn-content: var(--color-primary-content);
+    --btn-tint: var(--color-primary);
+    --btn-tint-content: var(--color-primary-content);
+}
+
+@utility btn-secondary {
+    --btn-color: var(--color-secondary);
+    --btn-content: var(--color-secondary-content);
+    --btn-tint: var(--color-secondary);
+    --btn-tint-content: var(--color-secondary-content);
+}
+
+@utility btn-accent {
+    --btn-color: var(--color-accent);
+    --btn-content: var(--color-accent-content);
+    --btn-tint: var(--color-accent);
+    --btn-tint-content: var(--color-accent-content);
+}
+
+@utility btn-info {
+    --btn-color: var(--color-info);
+    --btn-content: var(--color-info-content);
+    --btn-tint: var(--color-info);
+    --btn-tint-content: var(--color-info-content);
+}
+
+@utility btn-success {
+    --btn-color: var(--color-success);
+    --btn-content: var(--color-success-content);
+    --btn-tint: var(--color-success);
+    --btn-tint-content: var(--color-success-content);
+}
+
+@utility btn-warning {
+    --btn-color: var(--color-warning);
+    --btn-content: var(--color-warning-content);
+    --btn-tint: var(--color-warning);
+    --btn-tint-content: var(--color-warning-content);
+}
+
+@utility btn-error {
+    --btn-color: var(--color-error);
+    --btn-content: var(--color-error-content);
+    --btn-tint: var(--color-error);
+    --btn-tint-content: var(--color-error-content);
+}
+
+/* Styles */
+@utility btn-outline {
+    --btn-bg: transparent;
+    --btn-fg: var(--btn-tint);
+    --btn-border: var(--btn-tint);
+    --btn-bg-hover: var(--btn-tint);
+    --btn-fg-hover: var(--btn-tint-content);
+    --btn-border-hover: var(--btn-tint);
+    --btn-elevation: 0 0 #0000;
+}
+
+@utility btn-dash {
+    @apply btn-outline;
+    --btn-border-style: dashed;
+}
+
+@utility btn-soft {
+    --btn-bg: color-mix(in oklab, var(--btn-tint) 12%, transparent);
+    --btn-fg: var(--btn-tint);
+    --btn-border: transparent;
+    --btn-bg-hover: var(--btn-tint);
+    --btn-fg-hover: var(--btn-tint-content);
+    --btn-border-hover: var(--btn-tint);
+    --btn-elevation: 0 0 #0000;
+}
+
+@utility btn-ghost {
+    --btn-bg: transparent;
+    --btn-fg: var(--btn-tint);
+    --btn-border: transparent;
+    --btn-bg-hover: color-mix(in oklab, var(--btn-tint) 10%, transparent);
+    --btn-fg-hover: var(--btn-tint);
+    --btn-border-hover: transparent;
+    --btn-elevation: 0 0 #0000;
+}
+
+@utility btn-link {
+    @apply btn-ghost underline-offset-4 hover:underline;
+    --btn-bg-hover: transparent;
+}
+
+/* Sizes: scale the tokens instead of replacing them */
+@utility btn-xs {
+    --btn-scale: 0.6;
+    --btn-font-scale: 0.75;
+}
+
+@utility btn-sm {
+    --btn-scale: 0.8;
+    --btn-font-scale: 0.875;
+}
+
+@utility btn-md {
+    --btn-scale: 1;
+    --btn-font-scale: 1;
+}
+
+@utility btn-lg {
+    --btn-scale: 1.2;
+    --btn-font-scale: 1.125;
+}
+
+@utility btn-xl {
+    --btn-scale: 1.4;
+    --btn-font-scale: 1.25;
+}
+
+/* Shapes */
+@utility btn-wide {
+    @apply min-w-64;
+}
+
+@utility btn-block {
+    @apply w-full;
+}
+
+@utility btn-square {
+    @apply aspect-square;
+    --btn-px: 0;
+}
+
+@utility btn-circle {
+    @apply btn-square;
+    --btn-radius: 9999px;
+}

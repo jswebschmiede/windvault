@@ -1,0 +1,50 @@
+/*
+ * Semantic color tokens (DaisyUI naming). Registered via @theme, so they also generate
+ * regular utilities like bg-primary, text-error or border-base-300.
+ * Each color has a matching "-content" color that is readable on top of it.
+ */
+@theme {
+    --color-base-100: var(--color-white);
+    --color-base-200: var(--color-zinc-100);
+    --color-base-300: var(--color-zinc-200);
+    --color-base-content: var(--color-zinc-900);
+
+    --color-neutral: var(--color-zinc-800);
+    --color-neutral-content: var(--color-zinc-50);
+    --color-primary: var(--color-indigo-600);
+    --color-primary-content: var(--color-white);
+    --color-secondary: var(--color-pink-600);
+    --color-secondary-content: var(--color-white);
+    --color-accent: var(--color-teal-500);
+    --color-accent-content: var(--color-teal-950);
+    --color-info: var(--color-sky-500);
+    --color-info-content: var(--color-sky-950);
+    --color-success: var(--color-emerald-500);
+    --color-success-content: var(--color-emerald-950);
+    --color-warning: var(--color-amber-400);
+    --color-warning-content: var(--color-amber-950);
+    --color-error: var(--color-red-600);
+    --color-error-content: var(--color-white);
+}
+
+@layer base {
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+            --color-base-100: var(--color-zinc-900);
+            --color-base-200: var(--color-zinc-800);
+            --color-base-300: var(--color-zinc-700);
+            --color-base-content: var(--color-zinc-100);
+            --color-neutral: var(--color-zinc-100);
+            --color-neutral-content: var(--color-zinc-900);
+        }
+    }
+
+    :root[data-theme='dark'] {
+        --color-base-100: var(--color-zinc-900);
+        --color-base-200: var(--color-zinc-800);
+        --color-base-300: var(--color-zinc-700);
+        --color-base-content: var(--color-zinc-100);
+        --color-neutral: var(--color-zinc-100);
+        --color-neutral-content: var(--color-zinc-900);
+    }
+}

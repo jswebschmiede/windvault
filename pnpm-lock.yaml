@@ -41,7 +41,7 @@ importers:
 
   packages/apple-style-slider: {}
 
-  packages/sample-button: {}
+  packages/sample-buttons: {}
 
 packages:
 
