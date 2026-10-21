@@ -3,10 +3,23 @@
     "private": true,
     "scripts": {
         "dev": "pnpm -r --if-present run dev",
-        "build": "pnpm -r --if-present run build"
+        "build": "pnpm -r --if-present run build",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "check": "prettier --check . && eslint .",
+        "fix": "prettier --write . && eslint . --fix"
     },
     "devDependencies": {
+        "@eslint/js": "^10.0.1",
         "@tailwindcss/vite": "^4.3.3",
+        "eslint": "^10.13.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-jsdoc": "^65.4.0",
+        "globals": "^17.13.0",
+        "prettier": "^3.9.10",
+        "prettier-plugin-tailwindcss": "^0.8.1",
         "tailwindcss": "^4.3.3",
         "vite": "^8.3.5"
     }

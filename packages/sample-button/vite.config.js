@@ -1,13 +1,13 @@
-import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-    base: "./",
+    base: './',
     plugins: [tailwindcss()],
     build: {
         emptyOutDir: true,
         rollupOptions: {
-            input: "index.html"
-        }
-    }
+            input: 'index.html',
+        },
+    },
 });

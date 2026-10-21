@@ -95,6 +95,28 @@ pnpm dev
 pnpm build
 ```
 
+### 3. Linting & Formatting
+
+Linting and formatting are configured centrally in the root, so they apply to every package:
+
+- **ESLint** (`eslint.config.mjs`) checks JavaScript, including JSDoc.
+- **Prettier** (`.prettierrc.json`) formats JS, CSS, HTML, JSON and Markdown, and sorts Tailwind classes with `prettier-plugin-tailwindcss`.
+- `.editorconfig` sets the basics for editors: 4 spaces, LF, UTF-8.
+
+```bash
+pnpm check         # Check only, change nothing (Prettier + ESLint)
+pnpm fix           # Auto-fix everything that can be fixed (Prettier + ESLint)
+
+pnpm lint          # ESLint only
+pnpm lint:fix
+pnpm format        # Prettier only
+pnpm format:check
+```
+
+Some issues cannot be fixed automatically. `pnpm fix` leaves them in place, and the next `pnpm check` reports them.
+
+For VS Code, the extensions `dbaeumer.vscode-eslint` and `esbenp.prettier-vscode` are recommended. Set Prettier as the default formatter, so that formatting on save matches `pnpm format`.
+
 ---
 
 ## Creating a New Component
@@ -178,21 +200,15 @@ Write your component markup using Tailwind utility classes and reference `./src/
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Hero Banner</title>
     </head>
-    <body class="p-6 bg-gray-50 min-h-screen flex items-center justify-center">
-        <section class="max-w-4xl mx-auto text-center">
+    <body class="flex min-h-screen items-center justify-center bg-gray-50 p-6">
+        <section class="mx-auto max-w-4xl text-center">
             <h1 class="text-4xl font-bold text-gray-900">Hero Banner</h1>
         </section>
 
-        <script
-            type="module"
-            src="./src/index.js"
-        ></script>
+        <script type="module" src="./src/index.js"></script>
     </body>
 </html>
 ```

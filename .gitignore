@@ -16,5 +16,4 @@ npm-debug.log*
 
 # Editor and OS files
 .DS_Store
-.vscode/
 .idea/
