@@ -2,6 +2,18 @@
     "name": "@components/apple-style-slider",
     "version": "1.0.0",
     "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/apple-style-slider.umd.cjs",
+    "module": "./dist/apple-style-slider.js",
+    "exports": {
+        ".": {
+            "import": "./dist/apple-style-slider.js",
+            "require": "./dist/apple-style-slider.umd.cjs"
+        },
+        "./style.css": "./dist/apple-style-slider.css"
+    },
     "scripts": {
         "dev": "vite",
         "build": "vite build"

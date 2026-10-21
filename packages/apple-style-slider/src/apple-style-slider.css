@@ -1,0 +1,229 @@
+@reference "tailwindcss";
+
+/*
+ * Configuration via custom properties. Defaults live on :where(:root) (zero specificity)
+ * in @layer base, so overrides on :root, the slider root, the pagination element
+ * or as Tailwind arbitrary properties (e.g. [--apple-style-slider-gap:16px]) always win.
+ */
+@layer base {
+    :where(:root) {
+        /* Layout */
+        --apple-style-slider-content-width: min(1000px, 87.5vw);
+        --apple-style-slider-gap: 24px;
+
+        /* Slide size: width = clamp(min, fluid, max), capped at the content width */
+        --apple-style-slider-slide-min: 280px;
+        --apple-style-slider-slide-fluid: 25vw;
+        --apple-style-slider-slide-max: 640px;
+        --apple-style-slider-slide-h-min: 300px;
+        --apple-style-slider-slide-h-max: 460px;
+
+        /* Slide look */
+        --apple-style-slider-slide-radius: 28px;
+        --apple-style-slider-slide-padding: clamp(14px, 8cqi, 40px);
+        --apple-style-slider-slide-bg: #ffffff;
+        --apple-style-slider-slide-fg: #1d1d1f;
+        --apple-style-slider-slide-alt-bg: #1d1d1f;
+        --apple-style-slider-slide-alt-fg: #f5f5f7;
+        --apple-style-slider-slide-shadow: 0 4px 20px rgb(0 0 0 / 0.05);
+
+        /* Navigation buttons */
+        --apple-style-slider-button-size: 40px;
+        --apple-style-slider-button-icon-size: 24px;
+        --apple-style-slider-button-gap: 8px;
+        --apple-style-slider-button-bg: #e8e8ed;
+        --apple-style-slider-button-hover-bg: #dcdce1;
+        --apple-style-slider-button-fg: #1d1d1f;
+        --apple-style-slider-button-disabled-opacity: 0.35;
+
+        /* Pagination bullets */
+        --apple-style-slider-bullet-size: 8px;
+        --apple-style-slider-bullet-gap: 10px;
+        --apple-style-slider-bullet-radius: 999px;
+        --apple-style-slider-bullet-color: #6e6e73;
+        --apple-style-slider-bullet-active-color: #1d1d1f;
+        --apple-style-slider-bullet-opacity: 0.4;
+        --apple-style-slider-bullet-active-opacity: 1;
+        --apple-style-slider-bullet-active-width: 28px;
+        --apple-style-slider-bullet-active-scale: 1.25;
+        --apple-style-slider-bullet-duration: 0.3s;
+        --apple-style-slider-pagination-margin: 4px 0 24px;
+
+        /* Pagination fraction ("4 / 9") */
+        --apple-style-slider-fraction-color: currentColor;
+        --apple-style-slider-fraction-font-size: 0.875rem;
+        --apple-style-slider-fraction-total-opacity: 0.6;
+
+        --apple-style-slider-accent: #0071e3;
+    }
+
+    @media (max-width: 734px) {
+        :where(:root) {
+            --apple-style-slider-gap: 12px;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :where(:root:not([data-theme='light'])) {
+            --apple-style-slider-slide-bg: #1c1c1e;
+            --apple-style-slider-slide-fg: #f5f5f7;
+            --apple-style-slider-slide-alt-bg: #f5f5f7;
+            --apple-style-slider-slide-alt-fg: #1d1d1f;
+            --apple-style-slider-slide-shadow: 0 4px 20px rgb(0 0 0 / 0.4);
+            --apple-style-slider-button-bg: #2c2c2e;
+            --apple-style-slider-button-hover-bg: #3a3a3c;
+            --apple-style-slider-button-fg: #f5f5f7;
+            --apple-style-slider-bullet-color: #a1a1a6;
+            --apple-style-slider-bullet-active-color: #f5f5f7;
+            --apple-style-slider-accent: #2997ff;
+        }
+    }
+
+    :where(:root[data-theme='dark']) {
+        --apple-style-slider-slide-bg: #1c1c1e;
+        --apple-style-slider-slide-fg: #f5f5f7;
+        --apple-style-slider-slide-alt-bg: #f5f5f7;
+        --apple-style-slider-slide-alt-fg: #1d1d1f;
+        --apple-style-slider-slide-shadow: 0 4px 20px rgb(0 0 0 / 0.4);
+        --apple-style-slider-button-bg: #2c2c2e;
+        --apple-style-slider-button-hover-bg: #3a3a3c;
+        --apple-style-slider-button-fg: #f5f5f7;
+        --apple-style-slider-bullet-color: #a1a1a6;
+        --apple-style-slider-bullet-active-color: #f5f5f7;
+        --apple-style-slider-accent: #2997ff;
+    }
+}
+
+@layer components {
+    /* Root breaks out of any centered container to full viewport width */
+    .apple-style-slider {
+        --_offset-start: var(
+            --apple-style-slider-offset-start,
+            max(0px, calc((100% - var(--apple-style-slider-content-width)) / 2))
+        );
+        --_offset-end: var(
+            --apple-style-slider-offset-end,
+            max(0px, calc((100% - var(--apple-style-slider-content-width)) / 2))
+        );
+        @apply relative left-1/2 w-screen -translate-x-1/2;
+    }
+
+    .apple-style-slider__viewport {
+        @apply w-full cursor-grab snap-x snap-mandatory scrollbar-none overflow-x-auto scroll-smooth pt-3 pb-7 motion-reduce:scroll-auto;
+        /* % resolves against the scrollport -> same edges as the track padding */
+        scroll-padding-inline: var(--_offset-start) var(--_offset-end);
+
+        &::-webkit-scrollbar {
+            @apply hidden;
+        }
+
+        &:focus-visible {
+            @apply outline-2 outline-offset-2 outline-(--apple-style-slider-accent);
+        }
+    }
+
+    .apple-style-slider--dragging .apple-style-slider__viewport {
+        @apply cursor-grabbing snap-none scroll-auto;
+    }
+
+    .apple-style-slider__track {
+        @apply relative m-0 box-border flex w-max list-none gap-(--apple-style-slider-gap);
+        padding-inline: var(--_offset-start) var(--_offset-end);
+    }
+
+    .apple-style-slider__slide {
+        /* Fluid width, never wider than the content area (--apple-style-slider-inner is set by JS when alignEl is used) */
+        --_slide-w: min(
+            clamp(
+                var(--apple-style-slider-slide-min),
+                var(--apple-style-slider-slide-fluid),
+                var(--apple-style-slider-slide-max)
+            ),
+            var(--apple-style-slider-inner, var(--apple-style-slider-content-width))
+        );
+        @apply @container box-border flex min-w-0 shrink-0 grow-0 basis-(--_slide-w) snap-center snap-always flex-col gap-1.5 overflow-hidden select-none;
+        @apply rounded-(--apple-style-slider-slide-radius) bg-(--apple-style-slider-slide-bg) p-(--apple-style-slider-slide-padding) text-(--apple-style-slider-slide-fg) shadow-(--apple-style-slider-slide-shadow);
+        height: clamp(var(--apple-style-slider-slide-h-min), var(--_slide-w), var(--apple-style-slider-slide-h-max));
+
+        &:first-child {
+            @apply snap-start;
+        }
+
+        &:last-child {
+            @apply snap-end;
+        }
+
+        &:nth-child(even) {
+            @apply bg-(--apple-style-slider-slide-alt-bg) text-(--apple-style-slider-slide-alt-fg);
+        }
+    }
+
+    /* Generated navigation wrapper, aligned to the content's right edge */
+    .apple-style-slider__nav {
+        @apply flex justify-end gap-(--apple-style-slider-button-gap);
+        padding-inline: var(--_offset-start) var(--_offset-end);
+    }
+
+    .apple-style-slider__button {
+        @apply inline-flex size-(--apple-style-slider-button-size) cursor-pointer items-center justify-center rounded-full border-0 p-0 transition-[background-color,opacity] duration-150;
+        @apply bg-(--apple-style-slider-button-bg) text-(--apple-style-slider-button-fg);
+
+        & svg {
+            @apply pointer-events-none size-(--apple-style-slider-button-icon-size) shrink-0;
+        }
+
+        &:hover:not(:disabled) {
+            @apply bg-(--apple-style-slider-button-hover-bg);
+        }
+
+        &:disabled {
+            @apply cursor-default opacity-(--apple-style-slider-button-disabled-opacity);
+        }
+
+        &:focus-visible {
+            @apply outline-2 outline-offset-2 outline-(--apple-style-slider-accent);
+        }
+    }
+
+    .apple-style-slider__pagination {
+        @apply flex list-none justify-center gap-(--apple-style-slider-bullet-gap) p-0;
+        margin: var(--apple-style-slider-pagination-margin);
+
+        & li {
+            @apply flex;
+        }
+    }
+
+    .apple-style-slider__pagination--fraction {
+        @apply gap-0 text-(length:--apple-style-slider-fraction-font-size) font-medium whitespace-pre text-(--apple-style-slider-fraction-color) tabular-nums;
+    }
+
+    .apple-style-slider__fraction-separator,
+    .apple-style-slider__fraction-total {
+        @apply opacity-(--apple-style-slider-fraction-total-opacity);
+    }
+
+    .apple-style-slider__bullet {
+        @apply block size-(--apple-style-slider-bullet-size) cursor-pointer rounded-(--apple-style-slider-bullet-radius) border-0 p-0;
+        @apply bg-(--apple-style-slider-bullet-color) opacity-(--apple-style-slider-bullet-opacity);
+        @apply transition-[width,opacity,scale,background-color] duration-(--apple-style-slider-bullet-duration) ease-in-out;
+
+        &:focus-visible {
+            @apply outline-2 outline-offset-2 outline-(--apple-style-slider-accent);
+        }
+    }
+
+    .apple-style-slider__bullet--active {
+        @apply bg-(--apple-style-slider-bullet-active-color) opacity-(--apple-style-slider-bullet-active-opacity);
+    }
+
+    /* Variant "expand": active bullet grows into a pill (reference behaviour) */
+    .apple-style-slider__pagination--expand .apple-style-slider__bullet--active {
+        @apply w-(--apple-style-slider-bullet-active-width);
+    }
+
+    /* Variant "dot": plain round bullets, active one only changes color/opacity/scale */
+    .apple-style-slider__pagination--dot .apple-style-slider__bullet--active {
+        @apply scale-(--apple-style-slider-bullet-active-scale);
+    }
+}

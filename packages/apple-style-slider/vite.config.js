@@ -6,8 +6,12 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
         emptyOutDir: true,
-        rollupOptions: {
-            input: 'index.html',
+        lib: {
+            entry: 'src/index.js',
+            name: 'AppleStyleSlider',
+            fileName: 'apple-style-slider',
+            cssFileName: 'apple-style-slider',
+            formats: ['es', 'umd'],
         },
     },
 });

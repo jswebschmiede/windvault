@@ -1,11 +1,3 @@
-import './style.css';
+import './apple-style-slider.css';
 
-/**
- * Initializes the apple style slider component
- * @returns {void}
- */
-function initAppleStyleSlider() {
-    console.log('Apple Style Slider initialized');
-}
-
-initAppleStyleSlider();
+export { default } from './apple-style-slider.js';
